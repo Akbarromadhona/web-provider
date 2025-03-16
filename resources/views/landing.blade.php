@@ -72,7 +72,7 @@
           <h1 data-aos="fade-up">Welcome to <span>SkyLink Networks</span></h1>
           <p data-aos="fade-up" data-aos-delay="100">Quickly start your project now and set the stage for success<br></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#about" class="btn-get-started">Login</a>
+            <a href="{{ url('/login') }}" class="btn-get-started">Login</a>
           </div>
           <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
@@ -217,24 +217,25 @@
 
     <div class="container">
 
-        <div class="row gy-4">
-
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                <div class="pricing-item">
-                    <h3>Paket Basic</h3>
-                    <p class="description">Cocok untuk penggunaan ringan seperti browsing dan media sosial.</p>
-                    <h4><sup>Rp</sup>100.000<span> / bulan</span></h4>
-                    <ul>
-                        <li><i class="bi bi-check"></i> <span>Kecepatan hingga 10 Mbps</span></li>
-                        <li><i class="bi bi-check"></i> <span>Akses tak terbatas (Unlimited)</span></li>
-                        <li><i class="bi bi-check"></i> <span>Layanan pelanggan 24/7</span></li>
-                        <li class="na"><i class="bi bi-x"></i> <span>Gratis pemasangan</span></li>
-                        <li class="na"><i class="bi bi-x"></i> <span>Router WiFi gratis</span></li>
-                    </ul>
-                </div>
-          
-        </div>
-
+      @foreach($products as $product)
+      <div class="row gy-4">
+        
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="pricing-item">
+              <h3>{{ $product->name }}</h3>
+              <p class="description">{{ $product->description }}</p>
+              <h4><sup>Rp</sup> {{ number_format($product->price) }}<span> / bulan</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>Kecepatan hingga 10 Mbps</span></li>
+                <li><i class="bi bi-check"></i> <span>Akses tak terbatas (Unlimited)</span></li>
+                <li><i class="bi bi-check"></i> <span>Layanan pelanggan 24/7</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Gratis pemasangan</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Router WiFi gratis</span></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      @endforeach
     </div>
 
 </section>
@@ -256,24 +257,24 @@
     <section id="features-details" class="features-details section">
 
       <div class="container">
-
+        @foreach($articles as $article)
         <div class="row gy-4 justify-content-between features-item">
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Kecerdasan Buatan: Peran dan Dampaknya dalam Kehidupan</h3>
+              <h3>{{ $article->title }}</h3>
               <p>
-                Kecerdasan Buatan (AI) adalah teknologi yang memungkinkan mesin belajar dan mengambil keputusan layaknya manusia, dengan penerapan luas seperti asisten virtual, pengenalan wajah, mobil otonom, dan chatbot. AI memberikan dampak besar dalam berbagai bidang, mulai dari kesehatan dengan diagnosis penyakit dan robot bedah, industri melalui otomatisasi produksi, pendidikan dengan pembelajaran interaktif, keamanan siber untuk melindungi data, hingga transportasi dengan navigasi cerdas dan kendaraan pintar. Meskipun membawa banyak manfaat, AI juga menghadirkan tantangan seperti isu privasi dan pengurangan lapangan kerja. Namun, dengan pemanfaatan yang bijak, AI akan terus berkembang dan menjadi bagian penting dalam kehidupan manusia.
+                {{ $article->content }}
               </p>
             </div>
           </div>
 
         </div><!-- Features Item -->
-
+        @endforeach
       </div>
 
     </section><!-- /Features Details Section -->
@@ -288,22 +289,23 @@
       </div><!-- End Section Title -->
 
       <div class="container">
-
+        @foreach($galleries as $gallery)
+       
         <div class="row gy-4 justify-content-between features-item">
 
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+              <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="img-fluid" alt="">
             </div>
   
             <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
               <div class="content">
-                <h3>Pemasangan WiFi di Warga Sekitar</h3>
+                <h3>{{ $gallery->title }}</h3>
                 <p>
-                    Pemasangan WiFi di lingkungan warga dilakukan untuk meningkatkan akses internet dan konektivitas. Proses instalasi dimulai dengan pemasangan perangkat oleh teknisi yang memastikan jaringan berjalan lancar. Setelah itu, dilakukan uji kecepatan dan stabilitas sinyal untuk menjamin kualitas layanan. Warga setempat menyambut baik inisiatif ini karena memberikan banyak manfaat, seperti kemudahan belajar daring bagi anak-anak, mendukung perkembangan UMKM lokal, serta mempercepat akses terhadap layanan digital. Dengan adanya jaringan WiFi yang stabil dan terjangkau, masyarakat dapat lebih mudah mengakses informasi, berkomunikasi, dan memanfaatkan teknologi untuk berbagai kebutuhan sehari-hari.
+                  {{ $gallery->description }}
                 </p>
               </div>
             </div>
-  
+            @endforeach
           </div>
 
     </section><!-- /Services Section -->
