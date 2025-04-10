@@ -48,12 +48,14 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ url('/') }}" class="active">Home</a></li>
+          <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">Profile</a></li>
           <li><a href="#pricing">Produk</a></li>
           <li><a href="#features">Artikel</a></li>
           <li><a href="#services">Galery</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('login') }}">Login</a></li>
+          
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -72,7 +74,7 @@
           <h1 data-aos="fade-up">Welcome to <span>SkyLink Networks</span></h1>
           <p data-aos="fade-up" data-aos-delay="100">Quickly start your project now and set the stage for success<br></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="{{ url('/login') }}" class="btn-get-started">Login</a>
+            <a href="#about" class="btn-get-started">Get Started</a>
           </div>
           <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
@@ -215,27 +217,25 @@
         <p>Pilih paket internet yang sesuai dengan kebutuhan Anda dan nikmati koneksi cepat serta stabil.</p>
     </div><!-- Akhir Judul Bagian -->
 
+    
     <div class="container">
-
-      @foreach($products as $product)
       <div class="row gy-4">
-        
+      @foreach($products as $product)
+      
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="pricing-item">
               <h3>{{ $product->name }}</h3>
-              <p class="description">{{ $product->description }}</p>
               <h4><sup>Rp</sup> {{ number_format($product->price) }}<span> / bulan</span></h4>
               <ul>
-                <li><i class="bi bi-check"></i> <span>Kecepatan hingga 10 Mbps</span></li>
-                <li><i class="bi bi-check"></i> <span>Akses tak terbatas (Unlimited)</span></li>
-                <li><i class="bi bi-check"></i> <span>Layanan pelanggan 24/7</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Gratis pemasangan</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Router WiFi gratis</span></li>
-              </ul>
+                @foreach(array_slice(explode("\n", $product->points), 0, 3) as $point)
+                  <li>{{ trim($point) }}</li>
+                @endforeach
+              </ul>              
             </div>
           </div>
-      </div>
+      
       @endforeach
+    </div>
     </div>
 
 </section>
@@ -259,17 +259,16 @@
       <div class="container">
         @foreach($articles as $article)
         <div class="row gy-4 justify-content-between features-item">
-
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="img-fluid" alt="">
+            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="img-fluid" style="width: 400px; height: 300px; object-fit: cover; border-radius: 10px;">
           </div>
-
           <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
               <h3>{{ $article->title }}</h3>
-              <p>
+              <p style="max-width: 100%; word-break: break-word; white-space: normal; overflow-wrap: break-word;">
                 {{ $article->content }}
               </p>
+              
             </div>
           </div>
 
@@ -290,17 +289,14 @@
 
       <div class="container">
         @foreach($galleries as $gallery)
-       
         <div class="row gy-4 justify-content-between features-item">
-
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-              <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="img-fluid" alt="">
+              <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"  class="img-fluid" style="width: 400px; height: 300px; object-fit: cover;"">
             </div>
-  
             <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
               <div class="content">
                 <h3>{{ $gallery->title }}</h3>
-                <p>
+                <p style="max-width: 100%; word-break: break-word; white-space: normal; overflow-wrap: break-word;">
                   {{ $gallery->description }}
                 </p>
               </div>
@@ -351,44 +347,18 @@
         </div>
 
         <div class="row gy-4 mt-1">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div><!-- End Google Maps -->
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder=" Nama" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder=" Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Judul" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Pesan" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Pesan telah terkirim Terima Kasih!</div>
-
-                  <button type="submit">Kirim Pesan</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
-        </div>
-
+          <div class="col-lg-6 mx-auto" data-aos="fade-up" data-aos-delay="300">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" 
+              frameborder="0" 
+              class="d-block mx-auto"
+              style="border:0; width: 100%; max-width: 800px; height: 400px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>        
       </div>
 
     </section><!-- /Contact Section -->

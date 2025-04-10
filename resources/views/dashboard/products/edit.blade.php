@@ -13,13 +13,13 @@
             <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}" required>
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">Deskripsi</label>
-            <input type="text" name="description" id="description" class="form-control" value="{{ $product->description}}" required>
-        </div>
-
-        <div class="mb-3">
             <label for="description" class="form-label">Harga</label>
             <textarea name="price" id="price" class="form-control" rows="3">{{ $product->price }}</textarea>
+        </div>
+
+        <div>
+            <label for="points">Poin-poin (pisahkan dengan baris baru)</label>
+            <textarea name="points" rows="4" class="form-control">{{ old('points', $product->points ?? '') }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Simpan Perubahan</button>

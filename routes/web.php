@@ -9,7 +9,6 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,5 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('articles', ArticleController::class);
     Route::resource('galleries', GalleryController::class);
+
 });
 

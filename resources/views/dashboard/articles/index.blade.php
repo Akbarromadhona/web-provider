@@ -14,8 +14,9 @@
         @foreach($articles as $article)
         <tr>
             <td>{{ $article->title }}</td>
-            <td>{{ $article->content }}</td>
-            <td><img src="{{ asset('storage/' . $article->image) }}" width="50"></td>
+            <td style="max-width: 400px; word-break: break-word; white-space: normal; overflow-wrap: break-word;">{{ $article->content }}</td>
+            <td><img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
+            </td>
             <td>
                 <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display:inline;">

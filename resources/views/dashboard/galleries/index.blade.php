@@ -14,8 +14,8 @@
         @foreach($galleries as $gallery)
         <tr>
             <td>{{ $gallery->title }}</td>
-            <td>{{ $gallery->description }}</td>
-            <td><img src="{{ asset('storage/galleries/' . $gallery->image) }}" width="50"></td>
+            <td style="max-width: 400px; word-break: break-word; white-space: normal; overflow-wrap: break-word;">{{ $gallery->description }}</td>
+            <td><img src="{{ asset('storage/' . $gallery->image) }}" width="50"></td>
             <td>
                 <a href="{{ route('galleries.edit', $gallery->id) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('galleries.destroy', $gallery->id) }}" method="POST" style="display:inline;">

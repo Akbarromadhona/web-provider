@@ -7,9 +7,14 @@
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
     <section class="vh-100">
+      <a href="{{ url('/') }}" class="btn btn-outline-light position-absolute m-3 shadow" style="top: 0; left: 0; z-index: 999; background-color: #0d6efd; color: white;">
+        <i class="fas fa-arrow-left me-2"></i>
+      </a>
         <div class="container-fluid h-custom">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">

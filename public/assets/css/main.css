@@ -1253,6 +1253,12 @@ section,
   border-radius: 15px;
 }
 
+.features-item img {
+  border-radius: 8px;
+  padding: 5px;
+}
+
+
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
@@ -1417,7 +1423,7 @@ section,
 
 .pricing h4 {
   color: var(--accent-color);
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   font-family: var(--heading-font);
   margin-bottom: 0;
