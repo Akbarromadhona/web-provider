@@ -43,7 +43,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">SkyLink Networks</h1>
+        <h1 class="sitename">{{ $settings->site_title }}</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -71,7 +71,7 @@
       </div>
       <div class="container text-center">
         <div class="d-flex flex-column justify-content-center align-items-center">
-          <h1 data-aos="fade-up">Welcome to <span>SkyLink Networks</span></h1>
+          <h1 data-aos="fade-up">Welcome to <span>{{ $settings->site_title }}</span></h1>
           <p data-aos="fade-up" data-aos-delay="100">Quickly start your project now and set the stage for success<br></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
             <a href="#about" class="btn-get-started">Get Started</a>
@@ -144,6 +144,10 @@
             <li><i class="bi bi-check-circle"></i> <span>Layanan pelanggan 24/7 siap membantu kapan saja.</span></li>
             <li><i class="bi bi-check-circle"></i> <span>Paket fleksibel yang dapat disesuaikan dengan kebutuhan Anda, baik untuk rumah, kantor, maupun gaming.</span></li>
           </ul>
+
+          <a href="{{ route('profile_lengkap') }}" class="btn btn-primary mt-3">
+            Baca Selengkapnya
+          </a>
         </div>
 
         <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
@@ -220,24 +224,27 @@
     
     <div class="container">
       <div class="row gy-4">
-      @foreach($products as $product)
-      
+        @foreach($products as $product)
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="pricing-item">
+            <div class="pricing-item text-center p-4 border rounded shadow-sm h-100">
               <h3>{{ $product->name }}</h3>
               <h4><sup>Rp</sup> {{ number_format($product->price) }}<span> / bulan</span></h4>
-              <ul>
+              <ul class="text-start">
                 @foreach(array_slice(explode("\n", $product->points), 0, 3) as $point)
                   <li>{{ trim($point) }}</li>
                 @endforeach
-              </ul>              
+              </ul>
+    
+              {{-- Tombol Info Lebih Lanjut --}}
+              {{-- <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary mt-3">
+                Info Lebih Lanjut
+              </a> --}}
             </div>
           </div>
-      
-      @endforeach
+        @endforeach
+      </div>
     </div>
-    </div>
-
+    
 </section>
 
 
@@ -324,7 +331,7 @@
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt"></i>
               <h3>Alamat</h3>
-              <p>Dusun Kota,Desa Buniseuri</p>
+              <p>{{ $settings->alamat }}</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -332,7 +339,7 @@
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone"></i>
               <h3>Hubungi Kami</h3>
-              <p>+62 8953 8519 3806</p>
+              <p>{{ $settings->contact_phone }}</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -340,7 +347,7 @@
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-envelope"></i>
               <h3>Email Kami</h3>
-              <p>skylink@gmail.com</p>
+              <p>{{ $settings->contact_email }}</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -373,52 +380,25 @@
           <a href="index.html" class="logo d-flex align-items-center">
             <span class="sitename">QuickStart</span>
           </a>
-          <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
-          </div>
           <div class="social-links d-flex mt-4">
             <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
+            @if($settings->facebook)<a href="{{ $settings->facebook }}"><i class="bi bi-facebook"></i></a>@endif
             <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href=""><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
+          <h4>Alamat</h4>
+          <p>{{ $settings->alamat }}</p>
         </div>
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
+        <div class="col-lg-4 col-md-12 footer-newsletter ms-auto">
+          <h4>Support</h4>
+          <p class="mt-3"><strong>Phone:</strong> <span>{{ $settings->contact_phone }}</span></p>
+          <p><strong>Email:</strong> <span>{{ $settings->contact_email }}</span></p>
         </div>
-
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
-        </div>
+        
 
       </div>
     </div>

@@ -19,6 +19,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('products.index') }}">Produk</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('articles.index') }}">Artikel</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('galleries.index') }}">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('settings.index') }}">Setting</a></li>
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

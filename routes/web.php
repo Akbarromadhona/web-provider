@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\SettingController;
 
 
 /*
@@ -21,6 +22,8 @@ use App\Http\Controllers\LandingController;
 */
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
+Route::get('/profile', [LandingController::class, 'profile'])->name('profile_lengkap');
+
 
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -34,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('articles', ArticleController::class);
     Route::resource('galleries', GalleryController::class);
+    Route::resource('settings', SettingController::class);
 
 });
 
